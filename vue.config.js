@@ -1,4 +1,11 @@
+
 const glob = require('glob')
+const express = require('express')
+var app = express()
+app.get('/ss', function (req, res) {
+    // var str = require('./random.js')
+    res.send('str')
+})
 
 function getEntry(url) {
     // console.log(process.argv)
