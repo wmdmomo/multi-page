@@ -1,10 +1,11 @@
 // 首先引入Mock
-const Mock = require('mockjs');
+const Mock = require('mockjs')
 let url = require('url')
 let path = require('path')
-
-module.exports = function (req, res, next) {
-    let regTest = /^\/(page1|page2)\//
+console.log('$$$$$$$$$$$')
+// Mock.mock('/api/page1/getList',{id:3,code:'tttt'})
+module.exports = function(req, res, next) {
+    let regTest = /^\/api\/(page1|page2)\//
     let pathname = url.parse(req.url).pathname
     console.log('tttttttttt')
     function response(data, body) {
@@ -18,10 +19,10 @@ module.exports = function (req, res, next) {
             //     'Content-Length': Buffer.byteLength(body),
             //     'Content-Type': 'application/json'
             // });
-            res.end(body);
+            res.send(body)
         } catch (e) {
-            console.log(e);
-            return;
+            console.log(e)
+            return
         }
     }
 
@@ -30,16 +31,13 @@ module.exports = function (req, res, next) {
         let filePath = path.normalize('../mock/page' + pathname)
         console.log(filePath)
         let data = require(filePath)
-        data = Mock.mock(data)
-       
-        let body = JSON.stringify(data.body);
-        setTimeout(function () {
-            response(data, body);
-        }, 300);
+        data = Mock.mock(pathname, data)
 
+        let body = JSON.stringify(data.body)
+        setTimeout(function() {
+            response(data, body)
+        }, 300)
     } else {
         next()
     }
-
 }
-
