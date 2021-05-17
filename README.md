@@ -97,3 +97,14 @@ glob.sync('./src/pages/**/main.js'）
 它会规范化给定的path 解析``..``和 ``.``片段
 ##### express的使用
 ##### 框架模板自动机的使用
+
+##### dialog的使用
+对于dialog使用的时候 点击``确定``按钮
+要在达到某些条件的时候 才能出发这个确定的函数的执行
+```js
+if (this.currentStep === 2) {
+    this.flag = false
+}else{
+    e.preventDefault();
+}
+```

@@ -1,5 +1,0 @@
-let path = require('path')
-var cc = path.normalize('../test')
-console.log(cc)
-var data = require('./test')
-console.log(data(data.body))
