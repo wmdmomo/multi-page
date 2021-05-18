@@ -70,7 +70,7 @@ export default {
   },
   methods: {
     testA() {
-      this.$ajax.get('/api/page1/getList').then((res) => console.log(res))
+      this.$ajax.get('/page1/getList').then((res) => console.log(res))
     },
     handleNext() {
       this.currentStep++

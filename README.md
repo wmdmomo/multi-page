@@ -108,3 +108,31 @@ if (this.currentStep === 2) {
     e.preventDefault();
 }
 ```
+#### mock + express 的使用方法
+只是单独用的mock 它的请求是不会出现在Network
+vue.config.js里面的.devServer 与webpack.config.js里面的devServer 是一样的
+可以理解成他自己就是一个服务器 所以我之前 const app=express() 端口老是会+1
+``` JS
+module.exports = {
+  //...
+  devServer: {
+    before: function (app, server, compiler) {
+      app.get('/some/path', function (req, res) {
+        res.json({ custom: 'response' });
+      });
+    },
+  },
+};
+或者可以使用中间件
+我在mock.js 进行了定义 就是按照请求的路径 去对应的文件夹下面找对应的mock数据
+在mock.js 定义了一个函数
+把这个函数 写在 devServer.before里面
+devServer: {
+        before(app) {
+            // 这个app就是一个express
+            // 加载本地数据文件
+            app.use(mock)
+        }
+}
+这样子就可以了
+```
