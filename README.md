@@ -97,7 +97,45 @@ glob.sync('./src/pages/**/main.js'）
 它会规范化给定的path 解析``..``和 ``.``片段
 ##### express的使用
 ##### 框架模板自动机的使用
+1. ``npm install art-template --save``
 
+
+先理一下 vea项目里面对模板自动机使用的流程
+有一个``render.js`` 返回 ``artTemplate.render()``
+在``viewPath``下面将对应的生成的文件放在了下面
+
+在``dev-server``
+在 app.get的时候 他是把数据先require到
+再渲染到模板里面？？ 还是说直接是Mock.mock拦截了这个请求？
+##### .render(source, data, options)
+编译并返回渲染结果
+```JS
+// tpl是把这个文件里面的数据得到
+// html = render(viewPath, data, withLocalVhtml);
+// 懂了懂了 就是 TPL是一个模板的index.html 这个模板是在views下面的
+//  然后里面要用到locals 和data的数据
+// 把locals和data的数据进行传进去！！！
+var html = artTemplate.render(tpl, { locals, data })
+举个例子 下面这个样子
+var html = artTemplate.render('hi, <%=value%>,<%=data.key%>,<%=data.code%>.', {
+    value: 'aui',
+    data: { key: 134, code: 345 }
+})
+打印出来就是下面这个样子
+hi, aui,134,345.
+static 下面的是最开始的原始模板
+view下面的是生成的模板 这个模板是 在webpack.dev.conf.js的时候生成的
+
+```
+在dev-server里面是这么做的
+那么 如果是真的把 这个项目进行打包？？
+它又是怎么做的 我没有看到在build里面对模板自动框架做处理的代码
+
+
+
+```JS
+html = render(viewPath, data, withLocalVhtml);
+```
 ##### dialog的使用
 对于dialog使用的时候 点击``确定``按钮
 要在达到某些条件的时候 才能出发这个确定的函数的执行
