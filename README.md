@@ -310,7 +310,16 @@ JSSDK.node.update(<节点id 或 节点element对象>, {
   bar: 2,
 });
 
+在项目里面 每次添加或删除的时候他都用了一个 nextTick的方法重新获取节点列表
+还有一点要注意的就是在data里面只是定义了
+currentAllNodes:[]
+所以它内部对象的变更无法检测到
+用了 this.$set的方法
+
 ```
+#### 动态组件的用法 
+
+
 #### form表单
 如果有一个v-form-item 中的v-button type="submit"那么就不用为这个button设置点击事件
 直接对这个v-form @submit进行事件设置即可
