@@ -124,7 +124,7 @@ var html = artTemplate.render('hi, <%=value%>,<%=data.key%>,<%=data.code%>.', {
 打印出来就是下面这个样子
 hi, aui,134,345.
 static 下面的是最开始的原始模板
-view下面的是生成的模板 这个模板是 在webpack.dev.conf.js的时候生成的
+view下面的是生成的模板 这个模板是 在webpack.dev.conf.js的时候生成的吗？？？
 
 ```
 在dev-server里面是这么做的
@@ -174,3 +174,143 @@ devServer: {
 }
 这样子就可以了
 ```
+
+##### UI2样式的使用
+```JS
+var route = []
+route.push({
+    path: '/customer/contacter',
+    name: 'contacterRoute',
+    meta: {
+        title: '联系人 - 腾讯企点'
+    },
+    // component: r => require.ensure([], () => r(require('../../partner/contacter/route.vue')), 'contacter'),
+    children: [{
+        path: 'customer',
+        name: 'fieldsCustomer',
+        meta: {
+            title: '联系人字段 - 腾讯企点'
+        },
+        // component: r => require.ensure([], () => {
+        //     r(require('../../partner/contacter/fieldsCustomer.vue'));
+        // }, 'contacter')
+    }, {
+        path: 'system',
+        name: 'fieldsSystem',
+        meta: {
+            title: '联系人字段 - 腾讯企点'
+        },
+        // component: r => require.ensure([], () => {
+        //     r(require('../../partner/contacter/fieldsSystem.vue'));
+        // }, 'contacter')
+    }, {
+        path: 'uniq',
+        name: 'uniqRule',
+        meta: {
+            title: '联系人字段 - 腾讯企点'
+        },
+        // component: r => require.ensure([], () => {
+        //     r(require('../../partner/contacter/fieldsUniqRule.vue'));
+        // }, 'contacter')
+    }]
+});
+route.push({
+    path: '/test',
+    name: 'hhh'
+})
+
+// 这个函数 就是 你在这是route的时候 children的时候是直接写一个路径的 所以他就是在前面父亲的路径下直接进行的拼接
+var getList = function (pre, arr) {
+    return arr.map(url => {
+        if (url.children && url.children.length) {
+            return getList((pre ? pre + '/' : pre) + url.path, url.children);
+        }
+        else {
+            return (pre ? pre + '/' : pre) + url.path;
+        }
+    })
+};
+// 还要有一个flat的函数
+var flat = function (arr) {
+    var arr1 = []
+    arr.forEach(item => {
+        if (Array.isArray(item)) {
+            arr1 = arr1.concat(item)
+        } else {
+            arr1.push(item)
+        }
+    })
+    return arr1
+
+}
+// console.log(flat(getList("", route)))
+// 这个意思就是 在U2里面设置的route 进行一个数组的形式
+// 然后我现在请求的这个路径 如果是在U2路径里面的 就把我的
+// checkUI2的标志置为true
+// 就是意思是这个页面要用到UI2样式 
+flat(getList('', route)).forEach(url => {
+    url = url.split(':')[0];
+    console.log(url)
+    // realReqUrl.indexOf(url) > -1 && (checkUI2 = true);
+});
+```
+
+#### 新的知识点 mixin
+#### 关于Vuex
+Vue存在于window对象上时，Vuex会自动调用：Vue.use(Vuex)，因此在store中就不需要再显示调用
+Vue 如何存在于window对象 就是script引进来vue的地址
+
+#### 自动化流程模块的解析
+里面有个画布
+是@tencent/qd-process-ui
+这里学一下 QDPCanvas的使用方式
+里面有一个menu的菜单
+这些菜单就相当于你进入这个画板之前或者之后的配置页
+本来奇怪为什么 进入工作流按钮点击了之后找不到路由跳转之后的函数
+实际上就是这个菜单不显示了
+
+```js
+单独一个节点的信息如下所示
+{
+        name: '模版消息',
+        key: 'templateMessage',
+        bpmnType: 'Task',//如果是完成这种 EndEvent
+        // 还要再加上editable: false,
+        // 就是字段不允许编辑 默认是true
+        icon: 'icon-qd-bpmn-msg-tpl',
+        connType: 3,
+        actions: [
+            'create',
+            'connect',
+            'remove',
+        ],
+    },
+```
+##### 创建节点
+除了start和end之外 其它的节点都是会被复用的
+所以这里的逻辑就是 设置一个set 把节点的名字都加进去
+令一个indexMap 的key值为这些节点的code 初始index=0
+如果增加一个节点已经出现在这个set里面了 就把对应的index+1
+并且更新节点
+这个api
+
+
+``` JS
+// 获取画布中所有节点
+JSSDK.node.getAllNodes(); // 包含“开始”、“完成”节点
+
+// 更新节点名称
+JSSDK.node.update(<节点id 或 节点element对象>, { name: '新节点名称' }, () => {
+  console.info('更新节点成功了');
+});
+
+// PS： 支持向节点对象注入自定义属性，方式如下
+JSSDK.node.update(<节点id 或 节点element对象>, {
+  foo: 1, // 支持自定义属性
+  bar: 2,
+});
+
+```
+#### form表单
+如果有一个v-form-item 中的v-button type="submit"那么就不用为这个button设置点击事件
+直接对这个v-form @submit进行事件设置即可

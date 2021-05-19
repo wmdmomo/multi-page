@@ -1,8 +1,18 @@
 <template>
-  <div><span>page121212</span></div>
+  <QDPCanvas>
+    <template slot="header">
+      <QDPHeader name="wmdhhh"></QDPHeader>
+    </template>
+  </QDPCanvas>
 </template>
 <script>
-export default {}
+import { QDPHeader, QDPCanvas } from '@tencent/qd-process-ui'
+export default {
+  components: {
+    QDPHeader,
+    QDPCanvas
+  }
+}
 </script>
 <style scoped>
 </style>

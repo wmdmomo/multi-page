@@ -8,6 +8,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@tencent/qd-process-ui": "^1.0.93",
     "art-template": "^4.13.2",
     "axios": "^0.21.1",
     "core-js": "^3.8.3",
