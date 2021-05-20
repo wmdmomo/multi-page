@@ -1,10 +1,10 @@
 <template>
   <div>
-    <span>comtest1111111</span>
+    <span>comtest22222222222</span>
   </div>
 </template>
 <script>
 export default {
-  name: 'comTest1'
+  name: 'com-meg'
 }
 </script>

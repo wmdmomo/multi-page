@@ -19,34 +19,35 @@
     <comtest v-slot="tt">
       {{ tt.com.age }}
     </comtest> -->
-    <component :is="keyss"></component>
+    <component :is="nameCom"></component>
     <!-- <com-test-1></com-test-1> -->
+    <!-- <com-meg></com-meg> -->
   </div>
 </template>
 <script>
-import side from './components/index'
+// import ComMeg from './components/ComMeg.vue'
+import side from './components/index.js'
 // import comtest from './components/comtest.vue'
 // import ComTest1 from './components/ComTest1.vue'
-
-// console.log(side)
-// const comMap = {
-//   COMTEST1: 'com-test-1',
-//   COMTEST2: 'com-test-2',
-//   COMTEST3: 'com-test-3'
-// }
+// console.log(ComMeg)
+const comMap = {
+  COMTEST1: 'com-meg',
+  COMTEST2: 'com-mg',
+  COMTEST3: 'com-msg'
+}
 export default {
-  components: { ...side },
+  components: {...side },
   data() {
     return {
-      keyss: 'com-test-2'
+      keyss: 'COMTEST1'
     }
   },
-  // computed: {
-  //   nameCom() {
-  //     console.log(comMap[this.keyss])
-  //     return comMap[this.keyss]
-  //   }
-  // },
+  computed: {
+    nameCom() {
+      console.log(comMap[this.keyss])
+      return comMap[this.keyss]
+    }
+  },
   methods: {
     getFood() {
       this.$ajax.get('/page2/getFood').then(() => console.log('hhhhhhhhh'))

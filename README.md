@@ -323,3 +323,30 @@ currentAllNodes:[]
 #### form表单
 如果有一个v-form-item 中的v-button type="submit"那么就不用为这个button设置点击事件
 直接对这个v-form @submit进行事件设置即可
+
+#### vm.$listeners
+包含了父作用域中的 (不含 ``.native`` 修饰器的) ``v-on`` 事件监听器。它可以通过 ``v-on="$listeners"`` 传入内部组件——在创建更高层次的组件时非常有用。
+
+#### 引入一个文件夹下面所有的``.vue``文件
+父组件里面要做一个动态的子组件 可以把一个文件夹下面的子组件都引进来
+这里要注意的一点就是 组件的名字这种 比如 ``ComTest`` 注册的时候 会是
+``<com-test></com-test>``
+
+``` js
+// 引进来一组子组件 index.js
+const req = require.context('./', false, /[^.]+\.vue/);
+const components = req.keys().reduce((components, module) => {
+    const mod = req(module).default;
+    components[mod.name] = mod;
+    return components;
+}, {});
+
+export default components;
+
+// 在父组件里面调用这个子组件 index.js
+// 这个nameCom 必须是符合 com-test 这种规范的名字
+<component :is="nameCom"></component>
+import side from './components/index.js'
+components: {...side }
+
+```

@@ -6,14 +6,15 @@
 </template>
 <script>
 export default {
-    data(){
-        return{
-            com:{
-                user:'wmd',
-                age:12
-            },
-            test:'wwwwwwwww'
-        }
+  name: 'com-test',
+  data() {
+    return {
+      com: {
+        user: 'wmd',
+        age: 12
+      },
+      test: 'wwwwwwwww'
     }
+  }
 }
 </script>
