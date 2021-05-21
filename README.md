@@ -350,3 +350,6 @@ import side from './components/index.js'
 components: {...side }
 
 ```
+```
+test when git pull的时候是啥
+```
