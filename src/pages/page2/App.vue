@@ -1,6 +1,13 @@
 <template>
   <div>
     <div><span>2222</span></div>
+    <v-input
+      v-model="keywords"
+      name="search"
+      kind="search"
+      placeholder="姓名/公司/手机/QQ/邮箱等"
+      @search="keywordsSearch"
+    />
     <v-button @click="getFood">点击拿到page2下的数据</v-button>
     <v-form @submit="handleSub">
       <v-form-item label="姓名">
@@ -36,10 +43,11 @@ const comMap = {
   COMTEST3: 'com-msg'
 }
 export default {
-  components: {...side },
+  components: { ...side },
   data() {
     return {
-      keyss: 'COMTEST1'
+      keyss: 'COMTEST1',
+      keywords:''
     }
   },
   computed: {
@@ -49,6 +57,10 @@ export default {
     }
   },
   methods: {
+    keywordsSearch(){
+      console.log('被点击了',this.keywords)
+
+    },
     getFood() {
       this.$ajax.get('/page2/getFood').then(() => console.log('hhhhhhhhh'))
     },

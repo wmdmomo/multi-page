@@ -326,6 +326,8 @@ currentAllNodes:[]
 
 #### vm.$listeners
 包含了父作用域中的 (不含 ``.native`` 修饰器的) ``v-on`` 事件监听器。它可以通过 ``v-on="$listeners"`` 传入内部组件——在创建更高层次的组件时非常有用。
+#### vm.$props
+当前组件接收到的props对象
 
 #### 引入一个文件夹下面所有的``.vue``文件
 父组件里面要做一个动态的子组件 可以把一个文件夹下面的子组件都引进来
@@ -349,4 +351,10 @@ export default components;
 import side from './components/index.js'
 components: {...side }
 
+```
+
+#### watch的用法
+```JS
+deep: true  深度监听
+immediate: true 立即监听
 ```
