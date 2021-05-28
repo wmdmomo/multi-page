@@ -7,6 +7,12 @@
         <QDPHeader name="wmdhhh"></QDPHeader>
       </template>
     </QDPCanvas>
+    <button v-perm>测试哈哈哈哈</button>
+    <div @click="gg">
+      <div>111</div>
+      <div>222</div>
+      <div>333</div>
+    </div>
   </div>
 </template>
 
@@ -31,6 +37,9 @@ export default {
   },
 
   methods: {
+    gg(){
+      console.log('hhhhh')
+    },
     onCreatedNode(currentNode) {
       if (['end', 'start'].indexOf(currentNode.key) === -1) {
         let namesMap = new Set()

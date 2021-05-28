@@ -14,7 +14,8 @@ function getEntry(url) {
         urlArr.pop()
         // var uu=`${urlArr[0]}/${urlArr[1]?urlArr[1]+'/':''}`
         entrys[`${urlArr.join('/')}`] = {
-            entry: item
+            entry: item,
+            template: './src/pages/index/index.html',
             // 刚才试出来这个是只有build才会运行啊
         }
     })

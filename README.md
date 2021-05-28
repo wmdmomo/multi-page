@@ -1,28 +1,3 @@
-# learn-demo
-
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
-
 ### 多页面的配置
 有一个global的使用方式
 ```JS
@@ -40,7 +15,7 @@ glob.sync('./src/pages/**/main.js'）
 #### v-panel 的使用
 它的宽度 是在属性width里面 默认是900px
 所以 你在class
-
+ 
 #### 使用less
 - 设置 ``属性值``变量
 对一个重复出现的css值
@@ -349,7 +324,4 @@ export default components;
 import side from './components/index.js'
 components: {...side }
 
-```
-```
-test when git pull的时候是啥
 ```

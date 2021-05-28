@@ -3,7 +3,7 @@ const Mock = require('mockjs')
 let url = require('url')
 let path = require('path')
 module.exports = function(req, res, next) {
-    let regTest = /^\/(page1|page2)\//
+    let regTest = /^\/dev\/(page1|page2)\//
     let pathname = url.parse(req.url).pathname
     function response(data) {
         try {

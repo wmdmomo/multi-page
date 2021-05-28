@@ -29,13 +29,14 @@ var artTemplate = require('art-template')
 // 把locals和data的数据进行传进去！！！
 
 // var html = artTemplate.render(tpl, { locals, data })
-var html = artTemplate.render('hi, <%=value%>,<%=data.key%>,<%=data.code%>.', {
+var html = artTemplate.render('./tt.html', {
     value: 'aui',
-    data: { key: 134, code: 345 }
+    data: { key: 134, code: 345 },
+    arr:[{id:4},{id:5}]
 })
-// console.log(html)
-var htmlTemplate = `!!raw-loader!./static/page.html`
-console.log(htmlTemplate)
+console.log(html)
+// var htmlTemplate = `!!raw-loader!./static/page.html`
+// console.log(htmlTemplate)
 // console.log(tpl)
 // console.log(req.split('/'))
 // var realReqUrl = req.replace(/\?.+/g, '')

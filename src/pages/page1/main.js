@@ -8,6 +8,7 @@ Vue.config.productionTip = false
 vhtml.install(Vue)
 
 
+
 new Vue({
   render: h => h(App),
 }).$mount('#app')

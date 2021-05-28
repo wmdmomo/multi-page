@@ -1,5 +1,6 @@
 <template>
   <div>
+    <v-switch v-model="flag" @input="clickSwitch"></v-switch>
     <div><span>2222</span></div>
     <v-button @click="getFood">点击拿到page2下的数据</v-button>
     <v-form @submit="handleSub">
@@ -36,10 +37,11 @@ const comMap = {
   COMTEST3: 'com-msg'
 }
 export default {
-  components: {...side },
+  components: { ...side },
   data() {
     return {
-      keyss: 'COMTEST1'
+      keyss: 'COMTEST1',
+      flag: false
     }
   },
   computed: {
@@ -49,6 +51,9 @@ export default {
     }
   },
   methods: {
+    clickSwitch() {
+      console.log(this.flag)
+    },
     getFood() {
       this.$ajax.get('/page2/getFood').then(() => console.log('hhhhhhhhh'))
     },
