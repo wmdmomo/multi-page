@@ -6,7 +6,7 @@
     <v-button @click="handleNext">下一步</v-button>
     <!-- 折叠面板的使用 -->
     <!-- pannel面板的使用 -->
-    <v-panel v-model="open" :mask-closable="false" title="位置正中"> </v-panel>
+    <!-- <v-panel v-model="open" :mask-closable="false" title="位置正中"> </v-panel> -->
     <div class="wrap-1">
       <span>111</span>
       <div class="wrap-2">
@@ -42,10 +42,13 @@
       @confirm="confirmNow"
     >
     </v-dialog>
+    <v-button @click="showCard">点击打开PANEL</v-button>
+    <test-wa ref="card" @subVal="subVal"></test-wa>
   </div>
 </template>
 <script>
 import { Icon } from 'vhtml-ui'
+import TestWa from './components/testWa'
 const req = require.context('../../assets', false, /[^.]+\.svg$/)
 Icon.addSprites(req)
 export default {
@@ -68,7 +71,19 @@ export default {
       return this.currentStep
     }
   },
+  components: {
+    TestWa
+  },
   methods: {
+    showCard() {
+      this.$refs.card.show()
+    },
+    subVal() {
+      console.log('传递上来了11111111 ')
+    },
+    panelHide() {
+      this.open = false
+    },
     testA() {
       this.$ajax.get('/page1/getList').then((res) => console.log(res))
     },

@@ -9,14 +9,18 @@
     </QDPCanvas>
     <button v-perm>测试哈哈哈哈</button>
     <div @click="gg">
-      <div>111</div>
+      <div data-id="666">111</div>
       <div>222</div>
       <div>333</div>
     </div>
+    <!-- <dragarea>
+      <drag-item></drag-item>
+    </dragarea> -->
   </div>
 </template>
 
 <script>
+
 import TestCl from '../../components/TestCl'
 // import HelloWorld from './components/HelloWorld.vue'
 import { QDPHeader, QDPCanvas, JSSDK } from '@tencent/qd-process-ui'
@@ -37,8 +41,8 @@ export default {
   },
 
   methods: {
-    gg(){
-      console.log('hhhhh')
+    gg(e){
+      console.log(e)
     },
     onCreatedNode(currentNode) {
       if (['end', 'start'].indexOf(currentNode.key) === -1) {
