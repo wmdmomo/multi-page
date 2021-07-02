@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <div>111</div>
     <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
     <test-cl></test-cl>
     <QDPCanvas :nodes="nodes" @createNode="onCreatedNode">
@@ -8,19 +9,25 @@
       </template>
     </QDPCanvas>
     <button v-perm>测试哈哈哈哈</button>
+    <v-button status="primary" disabled>确定</v-button>
     <div @click="gg">
       <div data-id="666">111</div>
       <div>222</div>
       <div>333</div>
     </div>
+    <v-dragarea class="dnd-demo" :value="options1" use-rawdata>
+      <v-drag-item v-for="(item, index) in options1" :key="index" :data="item">
+        <span> this is item {{ item.text + '' + item.text }} of options1</span>
+      </v-drag-item>
+    </v-dragarea>
     <!-- <dragarea>
       <drag-item></drag-item>
     </dragarea> -->
+    <div>33333{{res}}</div>
   </div>
 </template>
 
 <script>
-
 import TestCl from '../../components/TestCl'
 // import HelloWorld from './components/HelloWorld.vue'
 import { QDPHeader, QDPCanvas, JSSDK } from '@tencent/qd-process-ui'
@@ -39,9 +46,15 @@ export default {
   created() {
     JSSDK.request.bind(this.$ajax)
   },
-
+  computed:{
+    res(){
+      return this.testList[222]
+    }
+  },
   methods: {
-    gg(e){
+    gg(e) {
+      this.$set(this.testList,222,'wmd')
+      // [222]='wmd'
       console.log(e)
     },
     onCreatedNode(currentNode) {
@@ -65,6 +78,18 @@ export default {
   },
   data() {
     return {
+      options1: [
+        {
+          text: 'qwe1'
+        },
+        {
+          text: 'qwe2'
+        },
+        {
+          text: 'qwe3'
+        }
+      ],
+      testList: {},
       nodes: [
         {
           type: 'base',
@@ -114,7 +139,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="less" scoped>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -122,5 +147,22 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+.dnd-demo {
+  display: inline-block;
+  padding: 20px;
+  position: relative;
+  background-color: #dadee7;
+
+  .v-drag-item {
+    padding: 5px 0;
+  }
+
+  .v-drag-item__inner {
+    width: 200px;
+    padding: 0 10px;
+    line-height: 30px;
+    background-color: #fff;
+  }
 }
 </style>

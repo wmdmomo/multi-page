@@ -27,8 +27,10 @@ export default {
   },
   methods: {
     panelHide() {
+      this.componentId = null
       this.open = false
-    //   this.componentId = null
+      // this.$emit('subVal')
+      // this.componentId = null
     },
     show() {
       this.open = true

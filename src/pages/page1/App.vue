@@ -44,6 +44,16 @@
     </v-dialog>
     <v-button @click="showCard">点击打开PANEL</v-button>
     <test-wa ref="card" @subVal="subVal"></test-wa>
+    <v-dragarea
+      class="dnd-demo"
+      @dragOn="dragOn"
+      :value="options1"
+      :maps="{ value: 'type' }"
+    >
+      <v-drag-item v-for="(item, index) in options1" :key="index" :data="item">
+        <span> this is item {{ item.text + '' + item.text }} of options1</span>
+      </v-drag-item>
+    </v-dragarea>
   </div>
 </template>
 <script>
@@ -54,6 +64,17 @@ Icon.addSprites(req)
 export default {
   data() {
     return {
+      options1: [
+        {
+          text: 'qwe1'
+        },
+        {
+          text: 'qwe2'
+        },
+        {
+          text: 'qwe3'
+        }
+      ],
       currentStep: 1,
       open: false,
       values1: [1, 2],
@@ -75,6 +96,9 @@ export default {
     TestWa
   },
   methods: {
+    dragOn() {
+      console.log('jjjjj')
+    },
     showCard() {
       this.$refs.card.show()
     },
@@ -85,7 +109,10 @@ export default {
       this.open = false
     },
     testA() {
-      this.$ajax.get('/page1/getList').then((res) => console.log(res))
+      this.$ajax
+        .get('/mock/page1/getList')
+        .then((res) => console.log(res))
+        .catch((err) => console.log("***",err))
     },
     handleNext() {
       this.currentStep++

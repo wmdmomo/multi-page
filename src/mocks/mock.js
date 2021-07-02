@@ -3,11 +3,11 @@ const Mock = require('mockjs')
 let url = require('url')
 let path = require('path')
 module.exports = function(req, res, next) {
-    let regTest = /^\/dev\/(page1|page2)\//
+    let regTest = /^\/mock\/(page1|page2)\//
     let pathname = url.parse(req.url).pathname
     function response(data) {
         try {
-            res.json(data)
+            res.json(data.body)
         } catch (e) {
             console.log(e)
             return
@@ -18,7 +18,7 @@ module.exports = function(req, res, next) {
     // 所以接口名字还是不要和页面一样了
     console.log(pathname,"##############")
     if (regTest.test(pathname)) {
-        console.log(pathname)
+        console.log('***',pathname)
         let filePath = path.normalize('../mocks/page' + pathname)
         let data = require(filePath)
         Mock.mock(pathname, req.method, data)
